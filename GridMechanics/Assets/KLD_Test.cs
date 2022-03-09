@@ -9,7 +9,7 @@ public class KLD_Test : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        grid = new KLD_Grid<int>(10, 10);
+        grid = new KLD_Grid<int>(10, 10, 1f, Vector3.zero);
     }
 
     // Update is called once per frame
