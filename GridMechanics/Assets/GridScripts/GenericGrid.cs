@@ -13,7 +13,7 @@ public class GenericGrid<T>
     float cellSize = 1f;
     Vector3 origin = Vector3.zero;
 
-    public GenericGrid(int _width, int _height, float _cellSize, Vector3 _origin) //constructor
+    public GenericGrid(int _width, int _height, float _cellSize = 1f, Vector3 _origin = new Vector3()) //constructor
     {
         width = _width;
         height = _height;
@@ -24,6 +24,11 @@ public class GenericGrid<T>
     }
 
     #region Not Implemented functions
+
+    public Vector2Int GetGridSize()
+    {
+        return new Vector2Int(gridArray.GetLength(0), gridArray.GetLength(1));
+    }
 
     public T GetCell(int x, int y)
     {
@@ -92,7 +97,7 @@ public class GenericGrid<T>
         return default;
     }
 
-    public List<T> GetCellsOnPath(int ax, int ay, int bx, int by)
+    public virtual List<T> GetCellsOnPath(int ax, int ay, int bx, int by)
     {
         //return all cells on a path from a to b
         //here you should ungeneric this function by testing T type with that line :
@@ -100,20 +105,24 @@ public class GenericGrid<T>
         //because you need to test something in T (most likely if its a wall)
         //to know if the cell is valid or not to walk on
 
-        if (typeof(T) == typeof(string)) return default;
-
+        //as a second solution, you can inherit a class from GenericGrid as a non generic class
+        //(for example, CellGrid does that)
+        //and override this function in that class
         return default;
     }
 
-    public bool IsOnSight(int ax, int ay, int bx, int by)
+    public virtual bool IsOnSight(int ax, int ay, int bx, int by)
     {
         //return true if a and b can see each other
+        //same thing as GetCellsOnPath, you can either
+        //test T type with : if (typeof(T) == typeof(string))
+        //or override this function in a child class (like CellGrid does)
         return default;
     }
 
     #endregion
 
-    #region Vector2Int functions
+    #region Vector2Int functions (overload)
     //same functions that works with Vector2Int argument
     //they call the functions above
 
